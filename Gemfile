@@ -47,6 +47,12 @@ group :development, :test do
 end
 
 group :development do
+
+	# Patch-level verification for Bundler. https://github.com/rubysec/bundler-audit
+	gem "bundler-audit", require: false
+	# vulnerabity checker for Ruby itself. https://github.com/civisanalytics/ruby_audit
+	gem "ruby_audit", require: false
+
   gem "boring_generators"
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
