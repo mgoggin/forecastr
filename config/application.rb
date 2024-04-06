@@ -20,6 +20,9 @@ Bundler.require(*Rails.groups)
 
 module Forecastr
   class Application < Rails::Application
+    config.generators do |g|
+      g.test_framework :rspec
+    end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
