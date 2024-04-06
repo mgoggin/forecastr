@@ -1,0 +1,10 @@
+plugins:
+  - standard-rails
+
+extend_config:
+  - .rubocop.ext.yml
+
+ignore:
+  - '**/*':
+    - Layout/SpaceInsideHashLiteralBraces
+    - RSpec/FilePath
