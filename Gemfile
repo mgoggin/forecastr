@@ -44,6 +44,9 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
+  gem "factory_bot_rails", "~> 6.4"
+  gem "faker", "~> 3.3"
+  gem "rspec-rails", "~> 6.1"
   gem "rubocop-thread_safety"
   gem "standard"
   gem "standard-rails"
@@ -67,8 +70,3 @@ group :development do
   # gem "spring"
 end
 
-gem "rspec-rails", "~> 6.1", groups: [:developement, :test]
-
-gem "factory_bot_rails", "~> 6.4", groups: [:developement, :test]
-
-gem "faker", "~> 3.3", groups: [:developement, :test]
