@@ -56,6 +56,7 @@ group :development do
   gem "ruby_audit", require: false
 
   gem "boring_generators"
+  gem "guard-rspec", require: false
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
