@@ -108,6 +108,7 @@ GEM
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     formatador (1.1.0)
+    geocoder (1.8.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     guard (2.18.1)
@@ -375,6 +376,7 @@ DEPENDENCIES
   debug
   factory_bot_rails (~> 6.4)
   faker (~> 3.3)
+  geocoder
   guard-rspec
   importmap-rails
   propshaft
