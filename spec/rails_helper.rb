@@ -31,9 +31,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  # You can uncomment this line to turn off ActiveRecord support entirely.
-  # config.use_active_record = false
-
+  config.use_active_record = false
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 end

@@ -72,3 +72,10 @@ end
 
 gem "simplecov", require: false, group: :test
 gem "geocoder"
+gem "faraday"
+
+gem "webmock", "~> 3.23", group: :test
+
+gem "oj", "~> 3.16"
+
+gem "vcr", "~> 6.2", group: :test
