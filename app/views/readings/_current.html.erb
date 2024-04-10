@@ -1,0 +1,10 @@
+<div class="flex flex-row justify-between content-center">
+  <h1 class="text-6xl font-bold text-black"><%= @weather.current_conditions.temperature.round(0) %>&#176;</h1>
+  <div class="align-middle text-right">
+    <h2 class="text-3xl text-gray-500"><%= @location.postal_code %></h2>
+    <%= link_to "Search again", root_path, class: "text-xs text-indigo-600" %>
+  </div>
+</div>
+<% if @weather.cached %>
+  <div class="py-3 text-xs text-gray-400">Showing cached weather information for this location.</div>
+<% end %>

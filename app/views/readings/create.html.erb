@@ -1,43 +1,10 @@
 <%= turbo_frame_tag :weather_lookup do %>
   <div>
-    <div class="flex flex-row justify-between content-center">
-      <h1 class="text-6xl font-bold text-black"><%= @weather.current_conditions.temperature.round(0) %>&#176;</h1>
-      <div class="align-middle text-right">
-        <h2 class="text-3xl text-gray-500"><%= @location.postal_code %></h2>
-        <%= link_to "Search again", root_path, class: "text-xs text-indigo-600" %>
-      </div>
-    </div>
-    <% if @weather.cached %>
-      <div class="py-3 text-xs text-gray-400">Showing cached weather information for this location.</div>
-    <% end %>
+    <%= render 'current', current_conditions: @weather.current_conditions, cached: @weather.cached %>
     <% if @weather.daily_forecast.any? %>
       <div class="mt-6 border-t border-gray-100">
         <dl class="flex flex-col justify-between">
-          <% @weather.daily_forecast.each do |forecast| %>
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-2 sm:px-3">
-              <dt class="text-sm font-medium leading-6 text-gray-900">
-                <% if forecast.forecasted_for.today? %>
-                  Today
-                <% else %>
-                  <%= forecast.forecasted_for.strftime("%-m/%-d") %>
-                <% end %>
-              </dt>
-              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                <div class="flex flex-col">
-                  <div>
-                    <span class="font-semibold"><%= forecast.temperature.current.round(0) %>&#176;</span>
-                    <% if forecast.temperature.high.present? %>
-                      <span class="text-xs text-gray-400">High: <%= forecast.temperature.high&.round(0) %></span>
-                    <% end %>
-                    <% if forecast.temperature.low.present? %>
-                      <span class="text-xs text-gray-400">Low: <%= forecast.temperature.low&.round(0) %></span>
-                    <% end %>
-                  </div>
-                  <p><%= forecast.summary %></p>
-                </div>
-              </dd>
-            </div>
-          <% end %>
+          <%= render partial: "daily", collection: @weather.daily_forecast, as: :forecast %>
         </dl>
       </div>
     <% end %>
