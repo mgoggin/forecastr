@@ -79,3 +79,5 @@ gem "webmock", "~> 3.23", group: :test
 gem "oj", "~> 3.16"
 
 gem "vcr", "~> 6.2", group: :test
+
+gem "rails-controller-testing", "~> 1.0", :group => :test
