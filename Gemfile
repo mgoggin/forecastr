@@ -2,47 +2,31 @@ source "https://rubygems.org"
 
 ruby "3.3.0"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+# Framework
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
-# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft"
-
-# Use sqlite3 as the database for Active Record
+# Drivers
+gem "redis", ">= 4.0.1"
 gem "sqlite3", "~> 1.4"
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
-
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+# Asset/View Extensions
 gem "importmap-rails"
-
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "propshaft"
+gem "stimulus-rails"
+gem "tailwindcss-rails"
 gem "turbo-rails"
 
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+# Application Server
+gem "puma", ">= 5.0"
 
-# Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem "tailwindcss-rails"
-
-# Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0.1"
-
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# Utilities
+gem "bootsnap", require: false
+gem "faraday"
+gem "geocoder"
+gem "oj", "~> 3.16"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails", "~> 6.4"
   gem "faker", "~> 3.3"
@@ -53,33 +37,17 @@ group :development, :test do
 end
 
 group :development do
-  # Patch-level verification for Bundler. https://github.com/rubysec/bundler-audit
-  gem "bundler-audit", require: false
-  # vulnerabity checker for Ruby itself. https://github.com/civisanalytics/ruby_audit
-  gem "ruby_audit", require: false
-
   gem "boring_generators"
+  gem "bundler-audit", require: false
   gem "guard-rspec", require: false
-  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "ruby_audit", require: false
   gem "web-console"
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
 end
 
-gem "simplecov", require: false, group: :test
-gem "geocoder"
-gem "faraday"
-
-gem "webmock", "~> 3.23", group: :test
-
-gem "oj", "~> 3.16"
-
-gem "vcr", "~> 6.2", group: :test
-
-gem "rails-controller-testing", "~> 1.0", :group => :test
-
-gem "timecop", "~> 0.9.8", :group => :test
+group :test do
+  gem "rails-controller-testing", "~> 1.0"
+  gem "simplecov", require: false
+  gem "timecop", "~> 0.9.8"
+  gem "vcr", "~> 6.2"
+  gem "webmock", "~> 3.23"
+end
