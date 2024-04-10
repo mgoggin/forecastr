@@ -7,6 +7,9 @@
         <%= link_to "Search again", root_path, class: "text-xs text-indigo-600" %>
       </div>
     </div>
+    <% if @weather.cached %>
+      <div class="p-3 text-xs text-gray-400">Showing cached weather information for this location.</div>
+    <% end %>
     <% if @weather.daily_forecast.any? %>
       <div class="mt-6 border-t border-gray-100">
         <dl class="flex flex-col justify-between">

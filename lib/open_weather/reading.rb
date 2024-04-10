@@ -1,6 +1,6 @@
 module OpenWeather
-  Reading = Data.define(:current_conditions, :daily_forecast) do
-    def self.from_api(payload)
+  Reading = Data.define(:current_conditions, :daily_forecast, :cached) do
+    def self.from_api(payload, cached: false)
       time_zone = payload[:timezone].presence || Time.zone_default.tzinfo.name
 
       Time.use_zone(time_zone) do
@@ -10,7 +10,7 @@ module OpenWeather
         current_conditions = CurrentConditions.from_api(current.slice(:dt, :temp))
         daily_forecast = Array.wrap(daily).map { DailyForecast.from_api(_1.slice(:temp, :dt, :summary)) }
 
-        new(current_conditions:, daily_forecast:)
+        new(current_conditions:, daily_forecast:, cached:)
       end
     end
   end
