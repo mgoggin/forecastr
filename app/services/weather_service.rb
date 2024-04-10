@@ -32,6 +32,6 @@ class WeatherService
   # @return [OpenWeather::Reading] the weather reading containing current conditions and extended forecast for the
   #   [Location].
   def call(location)
-    weather.forecast(location.latitude, location.longitude)
+    weather.forecast(location.latitude, location.longitude, location.postal_code)
   end
 end

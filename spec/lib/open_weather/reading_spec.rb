@@ -1,12 +1,13 @@
 require "rails_helper"
 
 RSpec.describe OpenWeather::Reading do
-  subject(:instance) { described_class.new(current_conditions:, daily_forecast:) }
+  subject(:instance) { described_class.new(current_conditions:, daily_forecast:, cached:) }
 
   let(:current_conditions) { instance_double("OpenWeather::CurrentConditions") }
   let(:daily_forecast) { instance_double("OpenWeather::DailyForecast") }
+  let(:cached) { false }
 
-  it { is_expected.to have_attributes(current_conditions:, daily_forecast:) }
+  it { is_expected.to have_attributes(current_conditions:, daily_forecast:, cached:) }
 
   describe ".from_api" do
     subject(:result) { described_class.from_api(payload) }
@@ -52,7 +53,8 @@ RSpec.describe OpenWeather::Reading do
               summary: "bar"
             )
           ]
-        )
+        ),
+        cached: false
       )
     end
 
@@ -97,7 +99,8 @@ RSpec.describe OpenWeather::Reading do
                 summary: "bar"
               )
             ]
-          )
+          ),
+          cached: false
         )
       end
     end
@@ -129,6 +132,12 @@ RSpec.describe OpenWeather::Reading do
       end
 
       it { is_expected.to have_attributes(daily_forecast: be_empty) }
+    end
+
+    context "when cached flag is passed in" do
+      subject(:reading) { described_class.from_api(payload, cached: true) }
+
+      it { is_expected.to have_attributes(cached: true) }
     end
   end
 end

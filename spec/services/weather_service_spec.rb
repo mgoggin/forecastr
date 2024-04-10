@@ -50,16 +50,16 @@ RSpec.describe WeatherService do
   describe "#call" do
     subject(:result) { instance.call(location) }
 
-    let(:location) { instance_double("Location", latitude: 1, longitude: 2) }
+    let(:location) { instance_double("Location", latitude: 1, longitude: 2, postal_code: "12345") }
 
     before do
-      allow(weather).to receive(:forecast).with(1, 2).and_return(:foo)
+      allow(weather).to receive(:forecast).with(1, 2, "12345").and_return(:foo)
     end
 
     it "is expected to call #forecast on the weather client with the latitude and longitude from the location" do
       result
 
-      expect(weather).to have_received(:forecast).with(1, 2)
+      expect(weather).to have_received(:forecast).with(1, 2, "12345")
     end
 
     it "is expected to return the return value of weather#forecast" do
