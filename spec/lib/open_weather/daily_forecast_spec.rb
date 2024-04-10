@@ -15,14 +15,28 @@ RSpec.describe OpenWeather::DailyForecast do
     let(:payload) do
       {
         temp: {
-          day: 70.12
+          day: 70.12,
+          min: 45.67,
+          max: 87.65
         },
         dt: Time.current.to_i,
         summary: "foo"
       }
     end
 
-    it { is_expected.to have_attributes(temperature: 70.12, forecasted_for: a_kind_of(Time), summary: "foo") }
+    it "is expected to have appropriate attributes" do
+      expect(result).to have_attributes(
+        temperature: a_kind_of(OpenWeather::Temperature).and(
+          have_attributes(
+            current: 70.12,
+            high: 87.65,
+            low: 45.67
+          )
+        ),
+        forecasted_for: a_kind_of(Time),
+        summary: "foo"
+      )
+    end
 
     context "when temperature is not present in the payload" do
       let(:payload) { { dt: Time.current.to_i, summary: "foo" } }
@@ -33,13 +47,17 @@ RSpec.describe OpenWeather::DailyForecast do
     context "when temperature is present containing a blank value" do
       let(:payload) { { temp: { day: "  " }, dt: Time.current.to_i, summary: "foo" } }
 
-      it { is_expected.to have_attributes(temperature: be_nil) }
+      it "is expected to raise ArgumentError" do
+        expect { result }.to raise_error(ArgumentError).with_message(":current must be provided")
+      end
     end
 
     context "when temperature is present containing nil" do
       let(:payload) { { temp: { day: nil }, dt: Time.current.to_i, summary: "foo" } }
 
-      it { is_expected.to have_attributes(temperature: be_nil) }
+      it "is expected to raise ArgumentError" do
+        expect { result }.to raise_error(ArgumentError).with_message(":current must be provided")
+      end
     end
 
     context "when forecasted_for is not present in the payload" do

@@ -8,7 +8,7 @@
       </div>
     </div>
     <% if @weather.cached %>
-      <div class="p-3 text-xs text-gray-400">Showing cached weather information for this location.</div>
+      <div class="py-3 text-xs text-gray-400">Showing cached weather information for this location.</div>
     <% end %>
     <% if @weather.daily_forecast.any? %>
       <div class="mt-6 border-t border-gray-100">
@@ -23,8 +23,18 @@
                 <% end %>
               </dt>
               <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                <%= forecast.temperature.round(0) %>&#176;
-                <%= forecast.summary %>
+                <div class="flex flex-col">
+                  <div>
+                    <span class="font-semibold"><%= forecast.temperature.current.round(0) %>&#176;</span>
+                    <% if forecast.temperature.high.present? %>
+                      <span class="text-xs text-gray-400">High: <%= forecast.temperature.high&.round(0) %></span>
+                    <% end %>
+                    <% if forecast.temperature.low.present? %>
+                      <span class="text-xs text-gray-400">Low: <%= forecast.temperature.low&.round(0) %></span>
+                    <% end %>
+                  </div>
+                  <p><%= forecast.summary %></p>
+                </div>
               </dd>
             </div>
           <% end %>

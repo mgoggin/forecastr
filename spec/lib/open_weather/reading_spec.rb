@@ -43,12 +43,12 @@ RSpec.describe OpenWeather::Reading do
         daily_forecast: match_array(
           [
             have_attributes(
-              temperature: 88.77,
+              temperature: a_kind_of(OpenWeather::Temperature).and(have_attributes(current: 88.77)),
               forecasted_for: a_kind_of(Time).and(have_attributes(zone: /E[D|S]T/)),
               summary: "foo"
             ),
             have_attributes(
-              temperature: 77.66,
+              temperature: a_kind_of(OpenWeather::Temperature).and(have_attributes(current: 77.66)),
               forecasted_for: a_kind_of(Time).and(have_attributes(zone: /E[D|S]T/)),
               summary: "bar"
             )
@@ -89,12 +89,12 @@ RSpec.describe OpenWeather::Reading do
           daily_forecast: match_array(
             [
               have_attributes(
-                temperature: 88.77,
+                temperature: a_kind_of(OpenWeather::Temperature).and(have_attributes(current: 88.77)),
                 forecasted_for: a_kind_of(Time).and(have_attributes(zone: "UTC")),
                 summary: "foo"
               ),
               have_attributes(
-                temperature: 77.66,
+                temperature: a_kind_of(OpenWeather::Temperature).and(have_attributes(current: 77.66)),
                 forecasted_for: a_kind_of(Time).and(have_attributes(zone: "UTC")),
                 summary: "bar"
               )

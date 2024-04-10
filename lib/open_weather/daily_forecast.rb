@@ -1,7 +1,8 @@
 module OpenWeather
   DailyForecast = Data.define(:temperature, :forecasted_for, :summary) do
     def self.from_api(payload)
-      temperature = payload.dig(:temp, :day).presence
+      temperature = payload[:temp].presence
+      temperature = Temperature.from_api(temperature) if temperature.present?
       forecasted_for = payload[:dt].presence
       summary = payload[:summary].presence
 

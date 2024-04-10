@@ -23,7 +23,7 @@ module OpenWeather
         .permit(
           :timezone,
           current: [:temp, :dt],
-          daily: [:dt, :summary, { temp: :day }]
+          daily: [:dt, :summary, { temp: [:day, :min, :max] }]
         )
 
       Reading.from_api(params, cached:)

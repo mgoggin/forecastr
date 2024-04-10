@@ -22,7 +22,8 @@ RSpec.describe "Readings", type: :request do
       instance_double(
         "OpenWeather::Reading",
         current_conditions: instance_double("OpenWeather::CurrentConditions", temperature: 72.32),
-        daily_forecast: []
+        daily_forecast: [],
+        cached: false
       )
     end
 
