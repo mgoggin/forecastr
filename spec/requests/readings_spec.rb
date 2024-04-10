@@ -3,13 +3,13 @@ require "rails_helper"
 RSpec.describe "Readings", type: :request do
   describe "GET /" do
     it "is expected to return HTTP success" do
-      get "/readings/new"
+      get "/"
 
       expect(response).to have_http_status(:success)
     end
 
     it "is expected to render the new template" do
-      get "/readings/new"
+      get "/"
 
       expect(response).to render_template("readings/new")
     end
