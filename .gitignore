@@ -38,3 +38,4 @@
 !/app/assets/builds/.keep
 /spec/examples.txt
 /coverage
+/.envrc
