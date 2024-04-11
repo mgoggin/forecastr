@@ -26,12 +26,12 @@ You can always just prefix all your commands with it like `RAILS_MASTER_KEY=mast
 #### Tests
 To run the test suite:
 ```console
-$ bin/rspec
+$ bin/rails spec
 ```
 
 To run the test suite and update the VCR cassettes:
 ```console
-$ VCR=1 bin/rspec
+$ VCR=1 bin/rails spec
 ```
 
 #### Server
