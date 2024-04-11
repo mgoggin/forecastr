@@ -33,15 +33,8 @@ jobs:
       - name: Install packages
         run: |
           yarn install --pure-lockfile
-      - name: Setup test database
-        env:
-          RAILS_ENV: test
-        run: |
-          bin/rails db:setup
       - name: Run tests
         env:
           RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: mgoggin/forecastr
-          PGPASSWORD: postgres
-        run: bundle exec rails test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: bundle exec rspec
