@@ -1,0 +1,12 @@
+<%= turbo_frame_tag :weather_lookup do %>
+  <div>
+    <%= render 'current', current_conditions: @weather.current_conditions, cached: @weather.cached %>
+    <% if @weather.daily_forecast.any? %>
+      <div class="mt-6 border-t border-gray-100">
+        <dl class="flex flex-col justify-between">
+          <%= render partial: "daily", collection: @weather.daily_forecast, as: :forecast %>
+        </dl>
+      </div>
+    <% end %>
+  </div>
+<% end %>
